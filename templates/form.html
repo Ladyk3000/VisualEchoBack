@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Echo</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+    <h1>Visual Echo</h1>
+
+    <div id="textInputContainer">
+        <form id="textForm" action="http://127.0.0.1:8000/process_text" method="post">
+            <label for="text">Введите текст:</label>
+            <input type="text" id="text" name="text" required>
+            <button type="button" onclick="submitForm()">Отправить</button>
+        </form>
+    </div>
+
+    <div id="imageContainer">
+    </div>
+
+    <script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
+</html>
