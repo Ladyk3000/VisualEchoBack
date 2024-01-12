@@ -1,6 +1,5 @@
 import random
 from PIL import Image, ImageDraw
-from check_intersection import check_intersection
 from generate_background_color import generate_background_color
 from generate_shapes import generate_shapes
 
