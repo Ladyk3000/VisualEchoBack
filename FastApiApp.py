@@ -2,11 +2,16 @@ import random
 from http.client import HTTPException
 
 from fastapi import FastAPI, Form, Request, Response, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import io
 
-from generate_shapes import generate_shapes
+from generate_image import generate_image
+origins = [
+    "http://localhost",
+    "http://localhost:3000"
+]
 
 
 class FastApiApp:
@@ -14,6 +19,13 @@ class FastApiApp:
         self.app = FastAPI()
         self.app.mount("/static", StaticFiles(directory="static"), name="static")
         self.templates = Jinja2Templates(directory="templates")
+        self.app.add_middleware(
+            CORSMiddleware,
+            allow_origins=origins,
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
 
         @self.app.get("/")
         def read_root(request: Request):
@@ -48,5 +60,5 @@ class FastApiApp:
 
     @staticmethod
     def generate_image(emotion_dict):
-        image = generate_shapes(emotion_dict, 200, 200)
+        image = generate_image(emotion_dict, 200, 200)
         return image
